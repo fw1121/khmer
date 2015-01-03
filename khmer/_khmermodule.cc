@@ -4340,6 +4340,26 @@ hllcounter_add( PyObject * self, PyObject * args )
 
 static
 PyObject *
+hllcounter_merge( PyObject * self, PyObject * args )
+{
+    khmer_KHLLCounterObject * me = (khmer_KHLLCounterObject *) self;
+    khmer::HLLCounter * hll_1 = me->hllcounter;
+
+    khmer_KHLLCounterObject * other;
+    khmer::HLLCounter * hll_2;
+
+    if (!PyArg_ParseTuple(args, "O!", &khmer_KHLLCounterType, &other)) {
+        return NULL;
+    }
+    hll_2 = other->hllcounter;
+
+    hll_1->merge(*hll_2);
+
+    Py_RETURN_NONE;
+}
+
+static
+PyObject *
 hllcounter_estimate_cardinality( PyObject * self, PyObject * args )
 {
     khmer_KHLLCounterObject * me = (khmer_KHLLCounterObject *) self;
@@ -4408,6 +4428,7 @@ static PyMethodDef khmer_hllcounter_methods[] = {
     {"estimate_cardinality", hllcounter_estimate_cardinality, METH_VARARGS, ""},
     {"consume_string", hllcounter_consume_string, METH_VARARGS, ""},
     {"consume_fasta", hllcounter_consume_fasta, METH_VARARGS, ""},
+    {"merge", hllcounter_merge, METH_VARARGS, ""},
     {NULL, NULL, 0, NULL}
 };
 
