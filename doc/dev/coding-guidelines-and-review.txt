@@ -88,6 +88,8 @@ CPython Checklist
         the name of the type within the module. Example: `khmer.ReadAligner`
       - [ ] Deallocator defined and cast to `(destructor)` in tp_dealloc
       - [ ] Do _not_ define a tp_getattr
+      - [ ] BONUS: write methods to present the state of the object via tp_str
+        & tp_repr
       - [ ] _Do_ pass in the array of methods in tp_methods
       - [ ] _Do_ define a new method in tp_new
    - [ ] PyMethodDef arrays contain doc strings
