@@ -79,6 +79,8 @@ in the middle.
 CPython Checklist
 -----------------
 
+Here's a checklist for new CPython types::
+
    - [ ] Named struct with PyObject_HEAD macro
    - [ ] `static PyTypeObject khmer_${OBJECTNAME}_Type` with the following
      entries
