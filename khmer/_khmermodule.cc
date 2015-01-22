@@ -4017,6 +4017,7 @@ static void khmer_readaligner_dealloc(khmer_ReadAlignerObject* obj)
 {
     delete obj->aligner;
     obj->aligner = NULL;
+    obj->ob_type->tp_free(obj);
 }
 
 //

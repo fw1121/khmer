@@ -81,7 +81,8 @@ CPython Checklist
 
 Here's a checklist for new CPython types::
 
-   - [ ] Named struct with PyObject_HEAD macro
+   - [ ] the CPython object name is of the form `khmer_${OBJECTNAME}_Object`
+   - [ ] Named struct with `PyObject_HEAD` macro
    - [ ] `static PyTypeObject khmer_${OBJECTNAME}_Type` with the following
      entries
       - [ ] `PyObject_HEAD_INIT(NULL)`
@@ -89,11 +90,12 @@ Here's a checklist for new CPython types::
       - [ ] The `tp_name` filed is a dotted name with both the module name and
         the name of the type within the module. Example: `khmer.ReadAligner`
       - [ ] Deallocator defined and cast to `(destructor)` in tp_dealloc
-      - [ ] Do _not_ define a tp_getattr
-      - [ ] BONUS: write methods to present the state of the object via tp_str
-        & tp_repr
-      - [ ] _Do_ pass in the array of methods in tp_methods
-      - [ ] _Do_ define a new method in tp_new
+        - [ ] The object's deallocator must be `self->ob_type->tp_free(self);`
+      - [ ] Do _not_ define a `tp_getattr`
+      - [ ] BONUS: write methods to present the state of the object via
+        `tp_str` & `tp_repr`
+      - [ ] _Do_ pass in the array of methods in `tp_methods`
+      - [ ] _Do_ define a new method in `tp_new`
    - [ ] PyMethodDef arrays contain doc strings
       - [ ] Methods are cast to `PyCFunctions`s
    - [ ] Type methods use their type Object in the method signature.
