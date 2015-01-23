@@ -87,6 +87,12 @@ def test_hll_len():
     assert hllcpp.estimate_cardinality() == len(hllcpp)
 
 
+def test_hll_empty():
+    hllcpp = khmer.HLLCounter(ERR_RATE, K)
+
+    assert len(hllcpp) == 0
+
+
 @raises(ValueError)
 def test_hll_invalid_base():
     # this test should raise a ValueError,
